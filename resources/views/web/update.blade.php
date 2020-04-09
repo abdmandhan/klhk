@@ -27,7 +27,7 @@
                         <x-input type="text" name="url_name" label="Url" :value="$data->url_name" />
                         <x-input type="text" name="ip_address" label="IP Address" :value="$data->ip_address" />
                         <x-input type="text" name="description" label="Description" :value="$data->description" />
-                        <x-input type="checkbox" name="status" label="Status" value=1 :value="$data->status" />
+                        <x-input type="checkbox" name="status" label="Status" :value="$data->status" />
                         <x-input type="text" name="image" label="Image Url" :value="$data->image" />
                     </div>
                     <div class="card-footer">

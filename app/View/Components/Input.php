@@ -20,6 +20,11 @@ class Input extends Component
         $this->value    = $value;
     }
 
+    public function isChecked($value)
+    {
+        return $value ? true : false;
+    }
+
     /**
      * Get the view / contents that represent the component.
      *

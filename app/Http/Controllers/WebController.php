@@ -51,6 +51,7 @@ class WebController extends Controller
      */
     public function show($id)
     {
+        echo $id;
     }
 
     /**
@@ -74,7 +75,12 @@ class WebController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token');
+
+        $web = Web::find($id);
+        $web->update($data);
+
+        echo json_encode($web);
     }
 
     /**
