@@ -8,13 +8,14 @@
 
 @section('content')
 <div class="container-fluid">
+    @include('layouts.message')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Web List</h3>
                     <div class="card-tools">
-                        <a href="" class="btn btn-primary">Add New Web</a>
+                        <a href="{{ route('web.create') }}" class="btn btn-primary">Add New Web</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -47,14 +48,21 @@
                                     <span class="badge badge-success">Active</span>
                                     @else
                                     <span class="badge badge-danger">Non-Active</span>
-                                    @endif    
+                                    @endif
                                 </td>
                                 {{-- <td><img src="{{ $item->image }}" alt="" srcset=""></td> --}}
                                 <td>{{ $item->image }}</td>
                                 <td>
-                                    <a href=""><i class="fa fa-trash text-danger"></i></a>
+                                    <form action="{{ route('web.destroy',$item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link"
+                                            onsubmit="confirm('Delete web {{ $item->name }} ?')"><i
+                                                class="fa fa-trash text-danger"></i></button>
+                                    </form>
                                     &nbsp;
-                                    <a href=""><i class="fa fa-edit text-primary"></i></a>
+                                    <a href="{{ route('web.edit',$item->id)}}"><i
+                                            class="fa fa-edit text-primary"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -63,10 +71,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <div class="row">
-        {{-- {{ $data->links() }} --}}
     </div>
 </div>
 @stop
@@ -80,5 +84,9 @@
     $(document).ready(function() {
     $('#example').DataTable();
 } );
+
+    document.onsubmit=function(){
+        return confirm('Sure?');
+    }
 </script>
 @stop

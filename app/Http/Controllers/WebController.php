@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WebStore;
 use App\Model\Web;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class WebController extends Controller
      */
     public function create()
     {
-        //
+        return view('web.create');
     }
 
     /**
@@ -34,9 +35,12 @@ class WebController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WebStore $request)
     {
-        //
+        Web::create($request->except('_token'));
+
+        $data = Web::all();
+        return view('web.index', compact('data'))->with('success', 'Berhasil menambah web');
     }
 
     /**
@@ -47,7 +51,6 @@ class WebController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -58,7 +61,8 @@ class WebController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Web::find($id);
+        return view('web.update', compact('data'));
     }
 
     /**
@@ -81,6 +85,9 @@ class WebController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $web = Web::find($id);
+        $web->delete();
+
+        return redirect()->back()->with('success', 'Berhasil delete web');
     }
 }

@@ -21,7 +21,7 @@ class CreateWebsTable extends Migration
             $table->string('url_name');
             $table->ipAddress('ip_address');
             $table->text('description');
-            $table->boolean('status');
+            $table->boolean('status')->default(false);
             $table->string('image');
             $table->timestamps();
             $table->softDeletes();
