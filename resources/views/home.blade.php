@@ -77,10 +77,6 @@
 </div>
 @stop
 
-@section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
 @section('js')
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');

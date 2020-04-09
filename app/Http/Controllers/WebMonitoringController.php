@@ -92,19 +92,39 @@ class WebMonitoringController extends Controller
         $web = Web::find($request->input('id'));
         if ($web == null) return response()->json(['status' => false]);
         try {
-            $resp = Http::timeout(2)->get($web->url_name);
+            $resp = Http::timeout(1000)->get($web->url_name);
             $resp = $resp->status();
-            WebMonitoring::create([
-                'id_web'    => $web->id,
-                'status'    => true,
-            ]);
-            return response()->json(['status' => true]);
+            // WebMonitoring::create([
+            //     'id_web'    => $web->id,
+            //     'status'    => true,
+            // ]);
+            return response()->json(
+                [
+                    'status'    => true,
+                    'data'      =>
+                    [
+                        'web_name'      => $web->name,
+                        'url'           => $web->url_name,
+                        'ip_address'    => $web->ip_address
+                    ]
+                ]
+            );
         } catch (\Illuminate\Http\Client\ConnectionException $th) {
-            WebMonitoring::create([
-                'id_web'    => $web->id,
-                'status'    => false
-            ]);
-            return response()->json(['status' => false]);
+            // WebMonitoring::create([
+            //     'id_web'    => $web->id,
+            //     'status'    => false
+            // ]);
+            return response()->json(
+                [
+                    'status' => false,
+                    'data'      =>
+                    [
+                        'web_name'      => $web->name,
+                        'url'           => $web->url_name,
+                        'ip_address'    => $web->ip_address
+                    ]
+                ]
+            );
         }
     }
 }

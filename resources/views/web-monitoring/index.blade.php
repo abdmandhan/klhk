@@ -43,7 +43,7 @@
                                 $.get( `{{ route('web_status')}}?id=${id}`, function( data ) {
                                     if(data.status) $(`#status_${id}`).html("<span class='badge badge-success'>Connect</span>");
                                     else $(`.status_${id}`).html("<span class='badge badge-danger'>Disconnect</span>");
-                                    console.log(data.status);
+                                    console.log("PING WEB : "+data.data.web_name+" IP ADDRESS :"+data.data.ip_address+" HASIL: "+data.status);
                                 });
                             </script>
                             @endpush
@@ -57,24 +57,11 @@
 </div>
 @stop
 
-@section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
 @section('js')
 <script>
     $(document).ready(function() {
     $('#example').DataTable();
 } );
-
-function get_web_status(id){
-    $.get( `{{ route('web_status')}}?id=${id}`, function( data ) {
-        if(data.status) $(`#status_${id}`).html("<span class='badge badge-success'>Connect</span>");
-        else $(`.status_${id}`).html("<span class='badge badge-danger'>Disconnect</span>");
-        console.log(data.status);
-    });
-};
-
 </script>
 
 @stop
