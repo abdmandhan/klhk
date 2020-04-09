@@ -94,10 +94,15 @@ class WebMonitoringController extends Controller
         try {
             $resp = Http::timeout(1000)->get($web->url_name);
             $resp = $resp->status();
-            // WebMonitoring::create([
-            //     'id_web'    => $web->id,
-            //     'status'    => true,
-            // ]);
+            WebMonitoring::updateOrCreate(
+                [
+                    'id_web'    => $web->id,
+                    'status'    => true,
+                ],
+                [
+                    'id_web'    => $web->id
+                ]
+            );
             return response()->json(
                 [
                     'status'    => true,
@@ -110,10 +115,15 @@ class WebMonitoringController extends Controller
                 ]
             );
         } catch (\Illuminate\Http\Client\ConnectionException $th) {
-            // WebMonitoring::create([
-            //     'id_web'    => $web->id,
-            //     'status'    => false
-            // ]);
+            WebMonitoring::updateOrCreate(
+                [
+                    'id_web'    => $web->id,
+                    'status'    => false,
+                ],
+                [
+                    'id_web'    => $web->id
+                ]
+            );
             return response()->json(
                 [
                     'status' => false,
