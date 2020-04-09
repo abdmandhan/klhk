@@ -15,8 +15,7 @@ class WebController extends Controller
      */
     public function index()
     {
-        $data = Web::all();
-        return view('web.index', compact('data'));
+        return view('web.index')->with(['data' => Web::all()]);
     }
 
     /**
@@ -38,9 +37,7 @@ class WebController extends Controller
     public function store(WebStore $request)
     {
         Web::create($request->except('_token'));
-
-        $data = Web::all();
-        return view('web.index', compact('data'))->with('success', 'Berhasil menambah web');
+        return redirect(route('web.index'))->with(['success' => 'Berhasil menambah web', 'data' => Web::all()]);
     }
 
     /**
@@ -51,7 +48,7 @@ class WebController extends Controller
      */
     public function show($id)
     {
-        echo $id;
+        return view('web.show')->with(['data' => Web::find($id)]);
     }
 
     /**
@@ -73,14 +70,15 @@ class WebController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(WebStore $request, $id)
     {
-        $data = $request->except('_token');
+        $data           = $request->except('_token');
+        $data['status'] = $request->has('status') ? true : false;
 
         $web = Web::find($id);
         $web->update($data);
 
-        echo json_encode($web);
+        return redirect(route('web.index'))->with(['success' => 'Berhasil update web', 'data' => Web::all()]);
     }
 
     /**

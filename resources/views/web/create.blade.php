@@ -25,7 +25,7 @@
                         <x-input type="text" name="url_name" label="Url" />
                         <x-input type="text" name="ip_address" label="IP Address" />
                         <x-input type="text" name="description" label="Description" />
-                        <x-input type="checkbox" name="status" label="Status" />
+                        <x-input type="checkbox" name="status" label="Status" value="1" />
                         <x-input type="text" name="image" label="Image Url" />
                     </div>
                     <div class="card-footer">

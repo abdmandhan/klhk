@@ -56,13 +56,16 @@
                                     <form action="{{ route('web.destroy',$item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-link"
+                                        <button type="submit" class="btn btn-link" title="Delete"
                                             onsubmit="confirm('Delete web {{ $item->name }} ?')"><i
                                                 class="fa fa-trash text-danger"></i></button>
                                     </form>
                                     &nbsp;
-                                    <a href="{{ route('web.edit',$item->id)}}"><i
+                                    <a href="{{ route('web.edit',$item->id)}}" title="Edit"><i
                                             class="fa fa-edit text-primary"></i></a>
+                                    &nbsp;
+                                    <a href="{{ route('web.show',$item->id)}}" title="Show"><i
+                                            class="fa fa-eye text-info"></i></a>
                                 </td>
                             </tr>
                             @endforeach

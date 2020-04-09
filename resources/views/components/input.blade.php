@@ -2,7 +2,8 @@
     <label class="col-sm-2 col-form-label">{{ $label }}</label>
     <div class="{{ $type=='checkbox' ? 'col-sm-1':'col-sm-10' }}">
         <input type="{{ $type }}" class="form-control" id="{{ $name }}" placeholder="{{ $label }}" name="{{ $name }}"
-            value={{ $value }} {{ $isChecked($value) ? 'checked':''}}>
+            value={{ $value }} {{ $isChecked($value) ? 'checked':''}} {{ $disabled ? 'disabled':''}}>
+
     </div>
 
     @if ($type=='checkbox')
