@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('web_status', 'WebMonitoringController@web_status')->name('web_status');
+Route::get('details/{id}', 'WebMonitoringController@details')->name('details');
 
 Route::group([
     'middleware'    => ['web', 'auth'],

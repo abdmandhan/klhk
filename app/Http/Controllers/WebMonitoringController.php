@@ -86,6 +86,20 @@ class WebMonitoringController extends Controller
         //
     }
 
+    public function details($id)
+    {
+        $data = Web::find($id);
+        $resp = Http::timeout(1000)->get($data->url_name);
+
+        $result =
+            [
+                'http_status'       => $resp->status(),
+                'header'            => $resp->headers(),
+            ];
+
+        return response()->json($result, 200);
+    }
+
     public function web_status(Request $request)
     {
         if ($request->input('id') == null) return response()->json(['status' => false]);
