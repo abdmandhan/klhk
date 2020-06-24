@@ -31,4 +31,5 @@ Route::group([
     Route::resource('eselon', 'EselonController');
     Route::resource('web_category', 'WebCategoryController');
     Route::resource('web_monitoring', 'WebMonitoringController');
+    Route::resource('user_management', 'UserManagementController');
 });

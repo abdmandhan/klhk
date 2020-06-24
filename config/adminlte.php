@@ -267,6 +267,17 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'User Management',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'User Management',
+                    'url'  => 'user_management',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+            ],
+        ],
 
     ],
 
