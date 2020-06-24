@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Validation\Rule;
+
 
 class UserManagementController extends Controller
 {
@@ -57,7 +59,7 @@ class UserManagementController extends Controller
         $user = User::create($user_data->toArray());
         $user->assignRole($data->get('roles'));
 
-        return redirect(route('user_management.index'));
+        return redirect(route('user_management.index'))->with('success', 'Berhasil membuat user');;
     }
 
     /**
@@ -79,7 +81,10 @@ class UserManagementController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::find($id);
+        $roles = Role::all();
+
+        return view('user-management.edit', compact('data', 'roles'));
     }
 
     /**
@@ -91,7 +96,22 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = collect($request->validate([
+            'name'          => ['required'],
+            'email'         => ['required', 'email', Rule::unique('users')->ignore($id)],
+            'roles'         => ['required'],
+            'password'      => ['required', 'confirmed'],
+        ]));
+
+        $data->put('password', Hash::make($data->get('password')));
+        $user_data = $data->only('name', 'email', 'password');
+
+        $user = User::find($id)->update($user_data->toArray());
+
+        $user = User::find($id);
+        $user->syncRoles($data->get('roles'));
+
+        return redirect(route('user_management.index'))->with('success', 'Berhasil update user');
     }
 
     /**
@@ -102,6 +122,10 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return redirect()->back()->with('success', 'Berhasil delete web');
     }
 }

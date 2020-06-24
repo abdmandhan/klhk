@@ -8,6 +8,7 @@
 
 @section('content')
 <div class="container-fluid">
+    @include('layouts.message')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -33,14 +34,21 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
-                                    @foreach ($item->roles as $item)
-                                    {{ $item->name }},
+                                    @foreach ($item->roles as $i)
+                                    {{ $i->name }},
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href=""><i class="fa fa-trash text-danger"></i></a>
+                                    <form action="{{ route('user_management.destroy',$item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-link" title="Delete"
+                                            onsubmit="confirm('Delete web {{ $item->name }} ?')"><i
+                                                class="fa fa-trash text-danger"></i></button>
+                                    </form>
                                     &nbsp;
-                                    <a href=""><i class="fa fa-edit text-primary"></i></a>
+                                    <a href="{{ route('user_management.edit',$item->id) }}"><i
+                                            class="fa fa-edit text-primary"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -62,6 +70,10 @@
     $(document).ready(function () {
         $('#example').DataTable();
     });
+
+    document.onsubmit = function () {
+        return confirm('Sure?');
+    }
 
 </script>
 @stop
