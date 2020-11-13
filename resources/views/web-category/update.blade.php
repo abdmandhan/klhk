@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Category')
+@section('title', 'Tambah Kategori')
 
 @section('content')
 <div class="container-fluid">
@@ -10,10 +10,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Edit Category</h4>
+                        <h4>Edit Kategori</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="{{ route('web_category.index') }}" class="btn btn-primary">Back</a>
+
                     </div>
                 </div>
                 <form action="{{ route('web_category.update',$data->id) }}" method="POST">
@@ -23,7 +23,8 @@
                         <x-input type="text" name="name" label="Web Name" :value="$data->name" />
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{{ route('web_category.index') }}" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -37,5 +38,9 @@
     $(document).ready(function() {
     $('#example').DataTable();
 } );
+
+    document.onsubmit=function(){
+        return confirm('Yakin Perubahan?');
+    }
 </script>
 @stop

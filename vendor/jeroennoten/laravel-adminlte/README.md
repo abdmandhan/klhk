@@ -12,7 +12,7 @@ If you want use the older versions, please use the following versions:
 - Version 1.x or branch laravel5-adminlte2:
 This version supports Laravel 5 and included AdminLTE v2
 - Version 2.x or branch laravel6-adminlte2:
-This version supports Laravel 6 and included AdminLTE v2
+This version supports Laravel 6 and higher and included AdminLTE v2
 
 1. [Requirements](#1-requirements)
 2. [Installation](#2-installation)
@@ -51,7 +51,7 @@ This version supports Laravel 6 and included AdminLTE v2
 
 ## 1. Requirements
 
-- Laravel 6.x
+- Laravel >= 6.x
 - PHP >= 7.2
 
 ## 2. Installation
@@ -66,6 +66,7 @@ This version supports Laravel 6 and included AdminLTE v2
 
     ```
     composer require laravel/ui
+    php artisan ui:controllers
     ```
     
 3. Install the package using the command (For fresh laravel installations):
@@ -98,15 +99,15 @@ This version supports Laravel 6 and included AdminLTE v2
     php artisan adminlte:update
     ```
    
-3. If you have [published](#8-customize-views) and modified the default master, page views or login views, you will need to update them too.
+3. If you have [published](#8-customize-views) and modified the default master, page views or login views, you will need to update them too. Please, note there could be huge updates on these views, so it is highly recommended to backup your changes.
 
     Option 1:
-    - Make a copy of the views you modified.
+    - Make a copy (or backup) of the views you have modified.
     - Publish the views again, using
         ```
-       php artisan vendor:publish --provider="JeroenNoten\LaravelAdminLte\AdminLteServiceProvider" --tag=views
+       php artisan adminlte:install --only=main_views
         ```
-   - Redo the modifications you did.
+    - Compare and redo the modifications you previously did to those views.
   
    Option 2:
    - Modify in the css, js and other assets location in the master and page views. 
@@ -176,16 +177,19 @@ You can list all available plugins, install/update/remove all or specific plugin
 
 Install all plugin assets
 - `artisan adminlte:plugins install`
+
 Install only Pace Progress & Select2 plugin assets
 - `artisan adminlte:plugins install --plugin=paceProgress --plugin=select2`
 
 Update all Plugin assets
 - `artisan adminlte:plugins update`
+
 Update only Pace Progress plugin assets
 - `artisan adminlte:plugins update`
 
 Remove all Plugin assets
 - `artisan adminlte:plugins remove`
+
 Remove only Select2 plugin assets
 - `artisan adminlte:plugins remove --plugin=select2`
 
@@ -232,8 +236,8 @@ If you want to use the included authentication related views manually, you can c
 @extends('adminlte::passwords.reset')
 ```
 
-By default, the login form contains a link to the registration form.
-If you don't want a registration form, set the `register_url` setting to `null` and the link will not be displayed.
+By default, the login form contains a link to the registration and password reset form.
+If you don't want a registration or password reset form, set the `register_url` respectively `password_reset_url` setting to `null` and the link will not be displayed.
 
 ## 6. Configuration
 
@@ -355,12 +359,12 @@ Example code for the `App/User` with custom image & description functions.
     {
         …
 
-        public static function adminlte_image()
+        public function adminlte_image()
         {
             return 'https://picsum.photos/300/300';
         }
 
-        public static function adminlte_desc()
+        public function adminlte_desc()
         {
             return 'That\'s a nice guy';
         }
@@ -427,31 +431,31 @@ The following config options available:
     Extra classes for body.
 - __`classes_brand`__
 
-    Extra classes for brand.
+    Extra classes for brand. Classes will be added to element `a.navbar-brand` if `layout_topnav` is used, otherwise they will be added to element `a.brand-link`.
 - __`classes_brand_text`__
 
-    Extra classes for brand text.
+    Extra classes for brand text. Classes will be added to element `span.brand-text`.
 - __`classes_content_header`__
 
-    Extra classes for content header container.
+    Classes for content header container. Classes will be added to the container of element `div.content-header`. If you left this empty, a default class `container` will be used when `layout_topnav` is used, otherwise `container-fluid` will be used as default.
 - __`classes_content`__
 
-    Extra classes for content container.
+    Classes for content container. Classes will be added to the container of element `div.content`. If you left this empty, a default class `container` will be used when `layout_topnav` is used, otherwise `container-fluid` will be used as default.
 - __`classes_sidebar`__
 
-    Extra classes for sidebar.
+    Extra classes for sidebar. Classes will be added to element `aside.main-sidebar`.
 - __`classes_sidebar_nav`__
 
-    Extra classes for sidebar navigation.
+    Extra classes for sidebar navigation. Classes will be added to element `ul.nav.nav-pills.nav-sidebar`.
 - __`classes_topnav`__
 
-    Extra classes for top navigation bar.
+    Extra classes for top navigation bar. Classes will be added to element `nav.main-header.navbar`.
 - __`classes_topnav_nav`__
 
-    Extra classes for top navigation.
+    Extra classes for top navigation. Classes will be added to element `nav.main-header.navbar`.
 - __`classes_topnav_container`__
 
-    Extra classes for top navigation bar container.
+    Extra classes for top navigation bar container. Classes will be added to the `div` wrapper inside element `nav.main-header.navbar`.
 
 
 ### 6.7 Sidebar
@@ -538,7 +542,7 @@ Here we have the url settings to setup the correct login/register link. Register
     Changes the register link or if set `false` it will hide.
  - __`password_reset_url`__
 
-    Changes the password reset url.
+    Changes the password reset url or if set `false` it will hide.
  - __`password_email_url`__
 
     Changes the password email url.
@@ -634,7 +638,30 @@ This will ignored if the top navigation layout is enabled, all menu items will a
 
 To get a dynamic item placing you can add the `key` attribute, with this you can add a unique identifier to a add before or after it new items.
 
-Use the `can` attribute if you want conditionally show the menu item. This integrates with Laravel's `Gate` functionality. If you need to conditionally show headers as well, you need to wrap it in an array like other menu items, using the `header` attribute:
+To add data-attributes to your menu link your can simply add a associative array called `data`. Here a simple example:
+
+```php
+[
+    [
+        'header' => 'BLOG',
+        'url' => 'admin/blog',
+        'data' => [
+            'test' => 'content',
+        ],
+    ],
+    [
+        'text' => 'Add new post',
+        'url' => 'admin/blog/new',
+        'data' => [
+            'test-one' => 'content-one',
+            'test-two' => 'content-two',
+        ],
+    ],
+]
+```
+
+
+Use the `can` attribute if you want conditionally show the menu item. This integrates with Laravel's `Gate` functionality. If you need to conditionally show headers as well, you need to wrap it in an array like other menu items, using the `header` attribute. You can add more `can` entries as array, see the second example:
 
 ```php
 [
@@ -646,7 +673,7 @@ Use the `can` attribute if you want conditionally show the menu item. This integ
     [
         'text' => 'Add new post',
         'url' => 'admin/blog/new',
-        'can' => 'add-blog-post'
+        'can' => ['add-blog-post', 'other-right']
     ],
 ]
 ```

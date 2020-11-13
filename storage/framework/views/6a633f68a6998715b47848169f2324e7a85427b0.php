@@ -27,9 +27,12 @@
 <?php endif; ?>
 
 <?php $__env->startSection('body'); ?>
+<div class="login-page" style="text-align: center">
+    <img src="<?php echo e(('img/logo.png')); ?>" >
+    <h1><b> KEMENTERIAN LINGKUNGAN HIDUP DAN KEHUTANAN </b></h1>
     <div class="login-box">
         <div class="login-logo">
-            <h1><b> Monitoring KLHK </b></h1>
+            <h2><b>MONITORING WEBSITE </b></h2>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
@@ -96,6 +99,7 @@
             </div>
         </div>
     </div>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('adminlte_js'); ?>

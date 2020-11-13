@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Category')
+@section('title', 'Data Kategori')
 
 @section('content')
 <div class="container-fluid">
@@ -10,10 +10,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Web : {{ $data->name }}</h4>
+                        <h4>Kategori : {{ $data->name }}</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="{{ route('web_category.index') }}" class="btn btn-primary">Back</a>
+                        <a href="{{ route('web_category.index') }}" class="btn btn-primary">kembali</a>
                     </div>
                 </div>
                 <div class="card-body">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Eselon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EselonController extends Controller
 {
@@ -15,6 +16,7 @@ class EselonController extends Controller
     public function index()
     {
         $data = Eselon::all();
+        $data = Eselon::orderBy('id', 'desc')->get();
         return view('eselon.index', compact('data'));
     }
 
@@ -37,7 +39,7 @@ class EselonController extends Controller
     public function store(Request $request)
     {
         Eselon::create($request->except('_token'));
-        return redirect(route('eselon.index'))->with(['success' => 'Berhasil menambah web', 'data' => Eselon::all()]);
+        return redirect(route('eselon.index'))->with(['success' => 'Berhasil menambah data', 'data' => Eselon::all()]);
     }
 
     /**
@@ -78,7 +80,7 @@ class EselonController extends Controller
         $web = Eselon::find($id);
         $web->update($data);
 
-        return redirect(route('eselon.index'))->with(['success' => 'Berhasil update web', 'data' => Eselon::all()]);
+        return redirect(route('eselon.index'))->with(['success' => 'Berhasil update data', 'data' => Eselon::all()]);
     }
 
     /**
@@ -89,9 +91,10 @@ class EselonController extends Controller
      */
     public function destroy($id)
     {
-        $web = Eselon::find($id);
-        $web->delete();
+        DB::table('eselons')->where('id','=',$id)->delete();
+        // $web = Eselon::find($id);
+        // $web->destroy();
 
-        return redirect()->back()->with('success', 'Berhasil delete web');
+        return redirect()->back()->with('success', 'Berhasil Menghapus Data');
     }
 }

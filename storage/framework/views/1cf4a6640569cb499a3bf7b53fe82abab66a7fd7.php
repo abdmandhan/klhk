@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Create Category'); ?>
+<?php $__env->startSection('title', 'Tambah Kategori'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
@@ -8,10 +8,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Edit Category</h4>
+                        <h4>Edit Kategori</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="<?php echo e(route('web_category.index')); ?>" class="btn btn-primary">Back</a>
+
                     </div>
                 </div>
                 <form action="<?php echo e(route('web_category.update',$data->id)); ?>" method="POST">
@@ -20,6 +20,7 @@
                         <?php echo method_field('PUT'); ?>
                          <?php if (isset($component)) { $__componentOriginal11c02d5af8eef3b9ca8b54c54983d5cb581e68d7 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Web Name','value' => $data->name]); ?>
+<?php $component->withName('input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
@@ -31,7 +32,8 @@
 <?php endif; ?> 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="<?php echo e(route('web_category.index')); ?>" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -45,6 +47,10 @@
     $(document).ready(function() {
     $('#example').DataTable();
 } );
+
+    document.onsubmit=function(){
+        return confirm('Yakin Perubahan?');
+    }
 </script>
 <?php $__env->stopSection(); ?>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WebStore;
 use App\Model\Web;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WebController extends Controller
 {
@@ -15,7 +16,10 @@ class WebController extends Controller
      */
     public function index()
     {
-        return view('web.index')->with(['data' => Web::all()]);
+        // return view('web.index')->with(['data' => Web::all()]);
+        $data = Web::all();
+        $data = Web::orderBy('id', 'desc')->get();
+        return view('web.index', compact('data'));
     }
 
     /**
@@ -34,9 +38,23 @@ class WebController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WebStore $request)
+    public function store(Request $request)
     {
-        Web::create($request->except('_token'));
+        // dd($request->file('image'));
+        $post = new Web();
+        $post->url_name             = $request->url_name;
+        $post->name                 = $request->name;
+        $post->ip_address           = $request->ip_address;
+        $post->id_web_category      = $request->id_web_category;
+        $post->id_eselon            = $request->id_eselon;
+        $post->description          = $request->description;
+        $post->status               = $request->has('status') ? 1 : 0;
+        if ($request->hasFile('image')) {
+            $request->file('image')->move('vendor/client/images/', $request->file('image')->getClientOriginalName());
+            $post->image = $request->file('image')->getClientOriginalName();
+        }
+        // Web::create($request->except('_token'));
+        $post->save();
         return redirect(route('web.index'))->with(['success' => 'Berhasil menambah web', 'data' => Web::all()]);
     }
 
@@ -70,15 +88,28 @@ class WebController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(WebStore $request, $id)
+    public function update(Request $request, $id)
     {
-        $data           = $request->except('_token');
-        $data['status'] = $request->has('status') ? true : false;
+        $post = Web::find($id);
+        $post->url_name             = $request->url_name;
+        $post->name                 = $request->name;
+        $post->ip_address           = $request->ip_address;
+        $post->id_web_category      = $request->id_web_category;
+        $post->id_eselon            = $request->id_eselon;
+        $post->description          = $request->description;
+        $post->status               = $request->has('status') ? 1 : 0;
+        if ($request->hasFile('image')) {
+            $request->file('image')->move('vendor/client/images/', $request->file('image')->getClientOriginalName());
+            $post->image = $request->file('image')->getClientOriginalName();
+        }
+        $post->update();
+        // $data           = $request->except('_token');
+        // // $data['status'] = $request->has('status') ? true : false;
 
-        $web = Web::find($id);
-        $web->update($data);
+        // $web = Web::find($id);
+        // $web->update($data);
 
-        return redirect(route('web.index'))->with(['success' => 'Berhasil update web', 'data' => Web::all()]);
+        return redirect(route('web.index'))->with(['success' => 'Berhasil update data', 'data' => Web::all()]);
     }
 
     /**
@@ -89,9 +120,10 @@ class WebController extends Controller
      */
     public function destroy($id)
     {
-        $web = Web::find($id);
-        $web->delete();
+        DB::table('webs')->where('id', '=', $id)->delete();
+        // $web = Web::find($id);
+        // $web->destroy();
 
-        return redirect()->back()->with('success', 'Berhasil delete web');
+        return redirect()->back()->with('success', 'Berhasil menghapus data');
     }
 }

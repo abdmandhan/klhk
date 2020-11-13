@@ -133,12 +133,15 @@ class WebMonitoringController extends Controller
             );
         }
     }
+
     public function index()
     {
 
         $data = WebMonitoring::with('web')->get();
-        var_dump($data);
-        die();
-        return view('web-monitoring.index', $data);
+        // foreach ($data as $d) {
+        //     echo $d->web->name;
+        // }
+        // die;
+        return view('web-monitoring.index', compact('data'));
     }
 }

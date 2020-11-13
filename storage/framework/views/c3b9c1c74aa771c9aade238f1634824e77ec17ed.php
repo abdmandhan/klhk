@@ -10,4 +10,5 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </select>
     </div>
-</div><?php /**PATH C:\xampp\htdocs\klhk\resources\views/components/select.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\xampp\htdocs\klhk\resources\views/components/select.blade.php ENDPATH**/ ?>

@@ -45,13 +45,12 @@ return [
     |
     */
 
-    'logo' => '<b>Monitoring KLHK</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/logoklhk.png',
+    'logo' => '<b>MONITORING KLHK</b>',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
-
     /*
     |--------------------------------------------------------------------------
     | User Menu
@@ -208,81 +207,83 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
         ['header' => 'Menu'],
         [
             'text' => 'Dashboard',
             'url'  => 'home',
-            'icon'    => 'fas fa-fw fa-user',
-            'role' => 'admin', 'user', 'superadmin',
+            'icon' => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'Manajemen Web utama',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Setting Halaman Website',
+            'icon' => 'fas fa-fw fa-cogs',
             'submenu' => [
                 [
-                    'text' => 'Layout',
-                    'url' => '#',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'role' => 'user', 'admin',
-                ]
-            ]
+                    'text' => 'Tentang',
+                    'url' => 'tentang',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Status Web',
+            'icon'    => 'fas fa-fw fa-wifi',
+            'submenu' => [
+                [
+                    'text' => 'Monitoring Sistem Publik',
+                    'url'  => '/website',
+                ],
+
+                [
+                    'text' => 'Monitoring Sistem internal',
+                    'url'  => '/sistem',
+                ],
+            ],
         ],
         [
             'text'    => 'Manajemen Akun',
-            'icon'    => 'fas fa-fw fa-user',
+            'icon'    => 'fas fa-fw fa-users',
+            'can'   => 'superadmin',
             'submenu' => [
                 [
                     'text' => 'Daftar Admin',
-                    'url'  => 'admin',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'role' => 'superadmin',
-
+                    'url'  => 'user-management',
+                    // 'icon' => 'fas fa-fw fa-lock',
                 ],
             ],
         ],
         [
-            'text'    => 'Web',
-            'icon'    => 'fas fa-fw fa-user',
+            'text'    => 'Manajemen Sistem',
+            'icon'    => 'fas fa-fw fa-globe',
+            // 'can'   => 'admin',
             'submenu' => [
                 [
-                    'text' => 'Daftar Web',
+                    'text' => 'Daftar Sistem',
                     'url'  => 'web',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'role' => 'admin', 'superadmin',
-
+                    // 'icon' => 'fas fa-fw fa-lock',
                 ],
                 [
-                    'text' => 'Eselon',
+                    'text' => 'Daftar Eselon',
                     'url'  => 'eselon',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'role' => 'admin',
+                    // 'icon' => 'fas fa-fw fa-lock',
+                    // 'can'   => 'admin',
                 ],
                 [
-                    'text' => 'Kategori',
+                    'text' => 'Kategori Sistem',
                     'url'  => 'web_category',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'role' => 'admin',
+                    // 'icon' => 'fas fa-fw fa-lock',
+                    // 'can'   => 'admin',
                 ],
             ],
         ],
         [
-            'text'    => 'Monitoring',
-            'icon'    => 'fas fa-fw fa-user',
-            'submenu' => [
-                [
-                    'text' => 'Web Monitoring',
-                    'url'  => 'web_monitoring',
-                    'icon' => 'fas fa-fw fa-lock',
-                    'role' => 'admin', 'superadmin', 'user',
-                ],
-            ],
+            'text' => 'Lihat Website',
+            'icon' => 'fas fa-fw fa-link',
+            'url' => '/front/home',
         ],
-
+        [
+            'text' => 'Tentang sistem',
+            'url'  => '/deskripsi',
+            'icon' => 'far fa-fw fa-file',
+        ],
     ],
 
     /*
@@ -343,16 +344,16 @@ return [
         ],
         [
             'name' => 'Select2',
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],

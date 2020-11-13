@@ -62,13 +62,11 @@
 <?php $__env->slot('subcopy'); ?>
 <?php echo app('translator')->get(
     "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: [:displayableActionUrl](:actionURL)',
+    'into your web browser:',
     [
         'actionText' => $actionText,
-        'actionURL' => $actionUrl,
-        'displayableActionUrl' => $displayableActionUrl,
     ]
-); ?>
+); ?> <span class="break-all">[<?php echo e($displayableActionUrl); ?>](<?php echo e($actionUrl); ?>)</span>
 <?php $__env->endSlot(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginal2dab26517731ed1416679a121374450d5cff5e0d)): ?>

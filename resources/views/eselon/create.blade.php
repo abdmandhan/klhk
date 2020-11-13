@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Eselon')
+@section('title', 'Tambah Eselon')
 
 @section('content')
 <div class="container-fluid">
@@ -10,20 +10,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Create Eselon</h4>
+                        <h4>Tambah Eselon</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="{{ route('eselon.index') }}" class="btn btn-primary">Back</a>
                     </div>
                 </div>
                 <form action="{{ route('eselon.store') }}" method="POST">
                     <div class="card-body">
                         @csrf
-                        <x-input type="text" name="name" label="Eselon Name" />
+                        <x-input type="text" name="name" label="Nama Eselon" />
+                        <x-input type="textarea" name="tentang" label="tentang" />
+                        <x-input type="text" name="pejabat" label="Nama Pejabat" />
+                        <x-input type="text" name="name_other" label="Nama Lain atau Singkatan" />
                         <x-input type="number" name="level" label="Level" />
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{{ route('eselon.index') }}" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>

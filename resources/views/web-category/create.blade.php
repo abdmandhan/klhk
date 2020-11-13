@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Category')
+@section('title', 'Tambah Kategori')
 
 @section('content')
 <div class="container-fluid">
@@ -10,19 +10,20 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Create Category</h4>
+                        <h4>Buat Kategori</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="{{ route('web_category.index') }}" class="btn btn-primary">Back</a>
+
                     </div>
                 </div>
                 <form action="{{ route('web_category.store') }}" method="POST">
                     <div class="card-body">
                         @csrf
-                        <x-input type="text" name="name" label="Category" />
+                        <x-input type="text" name="name" label="Nama kategori" />
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="{{ route('web_category.index') }}" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>

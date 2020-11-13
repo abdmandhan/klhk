@@ -20,21 +20,21 @@ class ActiveChecker
 
     public function isActive($item)
     {
-        if (isset($item['submenu'])) {
-            return $this->containsActive($item['submenu']);
+        if (isset($item['submenu']) && $this->containsActive($item['submenu'])) {
+            return true;
         }
 
-        if (isset($item['active'])) {
-            return $this->isExplicitActive($item['active']);
+        if (isset($item['active']) && $this->isExplicitActive($item['active'])) {
+            return true;
         }
 
-        if (isset($item['href'])) {
-            return $this->checkPattern($item['href']);
+        if (isset($item['href']) && $this->checkPattern($item['href'])) {
+            return true;
         }
 
         // Support URL for backwards compatibility
-        if (isset($item['url'])) {
-            return $this->checkPattern($item['url']);
+        if (isset($item['url']) && $this->checkPattern($item['url'])) {
+            return true;
         }
 
         return false;
@@ -42,9 +42,9 @@ class ActiveChecker
 
     protected function checkPattern($pattern)
     {
-        $fullUrlPattern = $this->url->to($pattern);
+        $urlPattern = $this->url->to($pattern);
 
-        $fullUrl = $this->request->fullUrl();
+        $url = $this->request->url();
 
         if (mb_substr($pattern, 0, 6) === 'regex:') {
             $regex = mb_substr($pattern, 6);
@@ -56,7 +56,7 @@ class ActiveChecker
             return false;
         }
 
-        return Str::is($fullUrlPattern, $fullUrl);
+        return Str::is($urlPattern, $url);
     }
 
     protected function containsActive($items)

@@ -20189,6 +20189,10 @@ html.maximized-card {
   margin-top: 10px;
 }
 
+.background-image{
+    background-image: url("background.png");
+}
+
 .login-logo,
 .register-logo {
   font-size: 2.1rem;
@@ -20206,7 +20210,8 @@ html.maximized-card {
 .register-page {
   -ms-flex-align: center;
   align-items: center;
-  background: #3d5064;
+  /* background: #3d5064; */
+  background-image: url("background.png");
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -20215,6 +20220,7 @@ html.maximized-card {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 
 .login-box,
 .register-box {

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Web Monitoring')
 
 @section('content')
 <div class="container-fluid">
@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Monitoring</h3>
                     <div class="card-tools">
-                        <a href="" class="btn btn-primary">Tambah Data Web</a>
+                        {{-- <a href="" class="btn btn-primary">Tambah Data Web</a> --}}
                     </div>
                 </div>
                 <div class="card-body">
@@ -19,30 +19,42 @@
                     {{-- <table id="example" class="table table-striped table-bordered table-hover table-light" --}}
                         {{-- style="width:100%"> --}}
                         <thead style="background-color:#BDECB6;">
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $item)
-                        <tr>
-                            <td>{{ $item->web->id }}</td>
-                            <td>{{ $item->web->name}}</td>
-                            <td><a href="{{$item->web->url_name}}" target="_blank">{{$item->web->url_name}}</a></td>
-                            <td>{{ $item->web->ip_address}}</td>
-                            <td id="status_{{ $item->id }}">
-                                @if ($item->status)
-                                <span class="badge badge-success">Connect</span>
-                                @else
-                                <span class="badge badge-danger">Disconnect</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="" title="Edit"><i class="fa fa-edit text-primary"></i></a>
+                            <tr>
+                                <th>No</th>
+                                <th>Id</th>
+                                <th>Nama Web</th>
+                                <th>Url</th>
+                                <th>IP Address</th>
+                                <th>Status</th>
+                                {{-- <th>Aksi</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $no1 = 1;
+                             @endphp
+                            @foreach ($data as $item)
+                            <tr>
+                                <td>{{$no1++}}</td>
+                                <td>{{ $item->web->id}}</td>
+                                <td>{{ $item->web->name}}</td>
+                                <td><a href="{{$item->web->url_name}}" target="_blank">{{$item->web->url_name}}</a></td>
+                                <td>{{ $item->web->ip_address}}</td>
+                                <td id="status_{{ $item->id }}">
+                                    @if ($item->status)
+                                    <span class="badge badge-success">Connect</span>
+                                    @else
+                                    <span class="badge badge-danger">Disconnect</span>
+                                    @endif
+                                </td>
+                                {{-- <td>
+                                    <a href="" title="Edit"><i class="fa fa-edit text-primary"></i></a>
 
-                                <a href="" title="Hapus"><i class="fa fa-trash text-danger"></i></a>
+                                    <a href="" title="Hapus"><i class="fa fa-trash text-danger"></i></a>
 
-                                <a href="" title="Detail"><i class="fa fa-eye text-info"></i></a>
-                            </td>
-                        </tr>
+                                    <a href="" title="Detail"><i class="fa fa-eye text-info"></i></a>
+                                </td> --}}
+                            </tr>
                             @push('js')
                             <script>
                                 var id = "{{ $item->id }}"

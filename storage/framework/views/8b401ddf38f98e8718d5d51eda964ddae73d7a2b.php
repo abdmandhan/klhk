@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Create Eselon'); ?>
+<?php $__env->startSection('title', 'Tambah Eselon'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
@@ -8,17 +8,17 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Create Eselon</h4>
+                        <h4>Tambah Eselon</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="<?php echo e(route('eselon.index')); ?>" class="btn btn-primary">Back</a>
                     </div>
                 </div>
                 <form action="<?php echo e(route('eselon.store')); ?>" method="POST">
                     <div class="card-body">
                         <?php echo csrf_field(); ?>
                          <?php if (isset($component)) { $__componentOriginal11c02d5af8eef3b9ca8b54c54983d5cb581e68d7 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Eselon Name']); ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Nama Eselon']); ?>
+<?php $component->withName('input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
@@ -30,6 +30,7 @@
 <?php endif; ?> 
                          <?php if (isset($component)) { $__componentOriginal11c02d5af8eef3b9ca8b54c54983d5cb581e68d7 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'number','name' => 'level','label' => 'Level']); ?>
+<?php $component->withName('input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
@@ -41,7 +42,8 @@
 <?php endif; ?> 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="<?php echo e(route('eselon.index')); ?>" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>

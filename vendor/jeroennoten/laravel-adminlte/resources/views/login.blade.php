@@ -29,9 +29,12 @@
 @endif
 
 @section('body')
+<div class="login-page" style="text-align: center">
+    <img src="{{ ('img/logo.png') }}" >
+    <h1><b> KEMENTERIAN LINGKUNGAN HIDUP DAN KEHUTANAN </b></h1>
     <div class="login-box">
         <div class="login-logo">
-            <h1><b> Monitoring KLHK </b></h1>
+            <h2><b>MONITORING WEBSITE </b></h2>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
@@ -93,6 +96,7 @@
             </div>
         </div>
     </div>
+</div>
 @stop
 
 @section('adminlte_js')

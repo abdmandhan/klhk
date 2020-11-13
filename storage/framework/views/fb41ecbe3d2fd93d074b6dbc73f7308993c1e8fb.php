@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Dashboard'); ?>
+<?php $__env->startSection('title', 'Web Monitoring'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Monitoring</h3>
                     <div class="card-tools">
-                        <a href="" class="btn btn-primary">Tambah Data Web</a>
+                        
                     </div>
                 </div>
                 <div class="card-body">
@@ -17,30 +17,36 @@
                     
                         
                         <thead style="background-color:#BDECB6;">
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <td><?php echo e($item->web->id); ?></td>
-                            <td><?php echo e($item->web->name); ?></td>
-                            <td><a href="<?php echo e($item->web->url_name); ?>" target="_blank"><?php echo e($item->web->url_name); ?></a></td>
-                            <td><?php echo e($item->web->ip_address); ?></td>
-                            <td id="status_<?php echo e($item->id); ?>">
-                                <?php if($item->status): ?>
-                                <span class="badge badge-success">Connect</span>
-                                <?php else: ?>
-                                <span class="badge badge-danger">Disconnect</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <a href="" title="Edit"><i class="fa fa-edit text-primary"></i></a>
-
-                                <a href="" title="Hapus"><i class="fa fa-trash text-danger"></i></a>
-
-                                <a href="" title="Detail"><i class="fa fa-eye text-info"></i></a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <th>No</th>
+                                <th>Id</th>
+                                <th>Nama Web</th>
+                                <th>Url</th>
+                                <th>IP Address</th>
+                                <th>Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no1 = 1;
+                             ?>
+                            <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+                                <td><?php echo e($no1++); ?></td>
+                                <td><?php echo e($item->web->id); ?></td>
+                                <td><?php echo e($item->web->name); ?></td>
+                                <td><a href="<?php echo e($item->web->url_name); ?>" target="_blank"><?php echo e($item->web->url_name); ?></a></td>
+                                <td><?php echo e($item->web->ip_address); ?></td>
+                                <td id="status_<?php echo e($item->id); ?>">
+                                    <?php if($item->status): ?>
+                                    <span class="badge badge-success">Connect</span>
+                                    <?php else: ?>
+                                    <span class="badge badge-danger">Disconnect</span>
+                                    <?php endif; ?>
+                                </td>
+                                
+                            </tr>
                             <?php $__env->startPush('js'); ?>
                             <script>
                                 var id = "<?php echo e($item->id); ?>"

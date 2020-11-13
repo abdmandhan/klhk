@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminStore;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data_admin['admin'] = DB::table('admin')->get();
+        // $hasil = Hash::make('admin');
+        // dd($hasil);
+        $data_admin['admin'] = DB::table('admin')->orderBy('id', 'DESC')->get();
         return view('admin.index', $data_admin);
         // $data_admin = \App\Admin::all();
         // var_dump($data_admin);

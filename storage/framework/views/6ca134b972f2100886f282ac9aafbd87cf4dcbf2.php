@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Create Category'); ?>
+<?php $__env->startSection('title', 'Tambah Kategori'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
@@ -8,17 +8,18 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <h4>Create Category</h4>
+                        <h4>Buat Kategori</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="<?php echo e(route('web_category.index')); ?>" class="btn btn-primary">Back</a>
+
                     </div>
                 </div>
                 <form action="<?php echo e(route('web_category.store')); ?>" method="POST">
                     <div class="card-body">
                         <?php echo csrf_field(); ?>
                          <?php if (isset($component)) { $__componentOriginal11c02d5af8eef3b9ca8b54c54983d5cb581e68d7 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Category']); ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Nama kategori']); ?>
+<?php $component->withName('input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
@@ -30,7 +31,8 @@
 <?php endif; ?> 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="<?php echo e(route('web_category.index')); ?>" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>

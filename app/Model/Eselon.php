@@ -9,5 +9,5 @@ class Eselon extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'level'];
+    protected $fillable = ['name', 'tentang', 'pejabat', 'level', 'name_other'];
 }

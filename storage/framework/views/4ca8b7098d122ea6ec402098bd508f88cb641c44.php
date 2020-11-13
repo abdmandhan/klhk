@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Create Eselon'); ?>
+<?php $__env->startSection('title', 'Tambah Eselon'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
@@ -11,7 +11,7 @@
                         <h4>Edit Eselon</h4>
                     </div>
                     <div class="card-tools">
-                        <a href="<?php echo e(route('eselon.index')); ?>" class="btn btn-primary">Back</a>
+
                     </div>
                 </div>
                 <form action="<?php echo e(route('eselon.update',$data->id)); ?>" method="POST">
@@ -19,7 +19,8 @@
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PUT'); ?>
                          <?php if (isset($component)) { $__componentOriginal11c02d5af8eef3b9ca8b54c54983d5cb581e68d7 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Eselon Name','value' => $data->name]); ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'text','name' => 'name','label' => 'Nama Eselon','value' => $data->name]); ?>
+<?php $component->withName('input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
@@ -30,7 +31,8 @@
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
                          <?php if (isset($component)) { $__componentOriginal11c02d5af8eef3b9ca8b54c54983d5cb581e68d7 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'number','name' => 'level','label' => 'Level','value' => $data->level]); ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Input::class, ['type' => 'number','name' => 'level','label' => 'Level','value' => $data->level,'disabled' => true]); ?>
+<?php $component->withName('input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
@@ -42,7 +44,8 @@
 <?php endif; ?> 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <a href="<?php echo e(route('eselon.index')); ?>" class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -56,6 +59,10 @@
     $(document).ready(function() {
     $('#example').DataTable();
 } );
+
+    document.onsubmit=function(){
+        return confirm('Yakin Perubahan?');
+    }
 </script>
 <?php $__env->stopSection(); ?>
 

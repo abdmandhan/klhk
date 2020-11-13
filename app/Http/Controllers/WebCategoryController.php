@@ -6,6 +6,7 @@ use App\Http\Requests\WebCategoryStore;
 // use App\Http\Requests\WebStore;
 use App\Model\WebCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WebCategoryController extends Controller
 {
@@ -17,6 +18,7 @@ class WebCategoryController extends Controller
     public function index()
     {
         $data = WebCategory::all();
+        $data = WebCategory::orderBy('id', 'desc')->get();
         return view('web-category.index', compact('data'));
     }
 
@@ -39,7 +41,7 @@ class WebCategoryController extends Controller
     public function store(Request $request)
     {
         WebCategory::create($request->except('_token'));
-        return redirect(route('web_category.index'))->with(['success' => 'Berhasil menambah web', 'data' => WebCategory::all()]);
+        return redirect(route('web_category.index'))->with(['success' => 'Berhasil menambah data', 'data' => WebCategory::all()]);
     }
 
     /**
@@ -81,7 +83,7 @@ class WebCategoryController extends Controller
         $web = WebCategory::find($id);
         $web->update($data);
 
-        return redirect(route('web_category.index'))->with(['success' => 'Berhasil update web', 'data' => WebCategory::all()]);
+        return redirect(route('web_category.index'))->with(['success' => 'Berhasil update data', 'data' => WebCategory::all()]);
     }
 
     /**
@@ -92,9 +94,10 @@ class WebCategoryController extends Controller
      */
     function destroy($id)
     {
-        $web = WebCategory::find($id);
-        $web->delete();
+        DB::table('web_categories')->where('id','=',$id)->delete();
+        // $web = WebCategory::find($id);
+        // $web->delete();
 
-        return redirect()->back()->with('success', 'Berhasil delete web');
+        return redirect()->back()->with('success', 'Berhasil menghapus data');
     }
 }
